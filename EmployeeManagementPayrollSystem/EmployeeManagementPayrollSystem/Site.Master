@@ -1,0 +1,62 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true"  CodeBehind="Site.master.cs" Inherits="EmployeeManagementPayrollSystem.SiteMaster" %>
+
+<!DOCTYPE html>
+
+<html lang="en">
+<head runat="server">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Employee Payroll</title>
+    <link href="Pages/Css/payroll-form.css" type="text/css" rel="stylesheet" />
+    <link href="Pages/Css/home.css" type="text/css" rel="stylesheet" />
+    <link href="Pages/Css/EmployeeManagement.css" type="text/css" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,600;1,500&display=swap"
+        rel="stylesheet" />
+   
+</head>
+<%--<body runat="server" >
+    <div class="flex-column content">--%>
+        <%--<div class="logo">
+            <a class="emp-text emp-payroll newClass" runat="server" onserverclick="btn_GetEmployees">Display Employee's</a>
+        </div>--%>
+        <%--<form class="form" runat="server" >
+            <asp:ContentPlaceHolder ID="MainContent" runat="server">
+            </asp:ContentPlaceHolder>
+        </form>--%>
+ <%--   </div>
+</body>--%>
+    <body class="master-body">
+    <form runat="server" class="master-form">
+        <div class="master-div">
+            <div class="nav-bar">
+                <header class="flex-row-center header">
+        <div class="logo">
+            <asp:Image src="../Assets/logo.png"  runat="server" />
+            <div>
+                <span class="emp-text">EMPLOYEE PAYROLL</span><br>
+            </div>
+        </div>
+    </header>
+            </div>
+            <div class="display-content">
+                <div class="side-nav-bar" id="main">
+                   <%-- <div class="select-menu" id="selectMenuAdd" onclick="ChangeColor()">
+                        <a ID="addEmployee" runat="server" onserverclick="btnAddEmployee_Click" class="anchor">Add Employee</a>  
+                    </div>
+                    <hr class="divider" />--%>
+                    <div class="select-menu-list" id="selectMenuList" >
+                        <a runat="server" onserverclick="btn_GetEmployees"  class="anchor">Employee List</a>
+                    </div>
+                </div>
+                <div class="parag">
+                   <asp:ContentPlaceHolder ID="MainContent" runat="server">
+                     </asp:ContentPlaceHolder>
+               </div>
+            </div>
+        </div>     
+    </form>  
+</body>
+</html>
+

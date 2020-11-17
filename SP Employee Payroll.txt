@@ -1,0 +1,136 @@
+Create db:-
+
+Create EmployeeDB;
+
+Tables:-
+
+-------------Employee------------
+
+create table Employee(
+EmpId int Primary Key identity(1,1),
+EName varchar(20),
+Gender char(1),
+HireDay date,
+DeptNo int,
+Email varchar(20),
+BirthDay date,
+JobDiscription varchar(20),
+ProfileImage varchar(20)
+);
+
+----------------Salary-------------
+create table Salary(
+SalaryId int Primary Key identity(1,1),
+SalaryMonth varchar(20),
+EmpSal money,
+EmpId int,
+ Foreign Key ( EmpId) References Employee (EmpId)
+);
+
+---------------Department--------------
+Create table Department(
+DeptNo int Primary Key identity (1,1),
+DeptName varchar(20)
+);
+
+insert into Department values('Hr');
+insert into Department values('Sales');
+insert into Department values('Finance');
+insert into Department values('Engineer');
+insert into Department values('Others');
+
+
+SP:-
+----------------------spAddEmployee----------------------
+
+create procedure [dbo].[spAddEmployee]
+@EName varchar(20),
+@Gender char(1),
+@HireDay date,
+@DeptNo int,
+@Email varchar(20),
+@BirthDay date,
+@JobDiscription varchar(20),
+@ProfileImage varchar(20)
+
+as
+begin
+Insert into Employee values(@EName,@Gender,@HireDay,
+@DeptNo,@Email,@BirthDay,@JobDiscription,
+@ProfileImage)
+SELECT SCOPE_IDENTITY()
+End
+
+----------------------spAddEmployeeSalary----------------------
+create procedure [dbo].[spAddEmployeeSalary]
+@SalaryMonth varchar(20),
+@EmpSal money,
+@EmpId int
+
+as
+begin
+Insert into Salary values(@SalaryMonth,@EmpSal,@EmpId)
+End
+
+----------------------spDeleteEmployee----------------------
+
+create Procedure [dbo].[spD]
+@EmpId int
+as
+begin
+delete from S where EmpId=@EmpId
+delete from E where EmpId=@EmpId
+End 
+
+
+----------------------spUpdateEmployee----------------------
+create procedure [dbo].[spU]
+@EmpId int ,
+@EName varchar(20),
+@Gender char(1),
+@HireDay date,
+@DeptNo int,
+@Email varchar(20),
+@BirthDay date,
+@JobDiscription varchar(20),
+@ProfileImage varchar(20),
+@SalaryMonth varchar(20),
+@EmpSal money
+as
+begin
+BEGIN TRANSACTION
+Update Employee
+set Employee.EName=@EName,Employee.Gender=@Gender,Employee.HireDay=@HireDay,Employee.DeptNo=@DeptNo,
+Employee.Email=@Email,Employee.BirthDay=@BirthDay,Employee.JobDiscription=@JobDiscription,Employee.ProfileImage=@ProfileImage
+from Employee employee Inner join Salary salary 
+on salary.EmpId=employee.EmpId
+and employee.EmpId=@EmpId
+
+Update Salary
+set Salary.EmpSal=@EmpSal,Salary.SalaryMonth=@SalaryMonth
+from Salary salary inner join Employee employee
+on salary.EmpId=employee.EmpId
+and employee.EmpId=@EmpId
+Commit
+End
+
+----------------------spGetAllEmployeeById----------------------
+
+Create procedure [dbo].[spGetEmployeeById]
+@EmpId int
+as
+begin
+Select Employee.EmpId,Employee.ProfileImage,Employee.EName,Employee.Gender,Department.DeptName,Salary.EmpSal,Employee.HireDay
+from Employee e, Salary s,Department d
+where e.EmpId=@EmpId and s.EmpId=@EmpId and e.DeptNo=d.DeptNo
+end
+
+
+----------------------spGetAllEmployee----------------------
+Create procedure [dbo].[spGetAllEmployees]
+as
+begin
+Select Employee.EmpId,Employee.ProfileImage,Employee.EName,Employee.Gender,Department.DeptName,Salary.EmpSal,Employee.HireDay
+from Employee e, Salary s,Department d
+where e.EmpId=s.EmpId and e.DeptNo=d.DeptNo
+end
