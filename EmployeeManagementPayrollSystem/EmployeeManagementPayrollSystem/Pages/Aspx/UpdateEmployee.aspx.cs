@@ -13,7 +13,11 @@ namespace EmployeeManagementPayrollSystem.Pages.Aspx
 {
     public partial class UpdateEmployee : System.Web.UI.Page
     {
-        EmployeeBL employee = new EmployeeBL();
+        public readonly IEmployeeBL employee;
+        public UpdateEmployee(IEmployeeBL employee)
+        {
+            this.employee = employee;
+        }
         DisplayEmployeeDetails updateEmployee = new DisplayEmployeeDetails();
         public static int HR = 1;
         public static int SALES = 2;
@@ -136,7 +140,7 @@ namespace EmployeeManagementPayrollSystem.Pages.Aspx
             }
             if (profile4.Checked)
             {
-                image1.ImageUrl = "../Assets/Ellipse -7.png";
+                image4.ImageUrl = "../Assets/Ellipse -7.png";
                 updateEmployee.Image = image4.ImageUrl;
                 profile2.Checked = false;
                 profile3.Checked = false;
@@ -322,6 +326,26 @@ namespace EmployeeManagementPayrollSystem.Pages.Aspx
             if (others.Checked)
             {
                 updateEmployee.DeptNo = OTHER;
+            }
+            if (profile1.Checked)
+            {
+                image1.ImageUrl = "../Assets/Ellipse -3.png";
+                updateEmployee.Image = image1.ImageUrl;
+            }
+            if (profile2.Checked)
+            {
+                image1.ImageUrl = "../Assets/Ellipse -1.png";
+                updateEmployee.Image = image2.ImageUrl;
+            }
+            if (profile3.Checked)
+            {
+                image1.ImageUrl = "../Assets/Ellipse -8.png";
+                updateEmployee.Image = image3.ImageUrl;
+            }
+            if (profile4.Checked)
+            {
+                image1.ImageUrl = "../Assets/Ellipse -7.png";
+                updateEmployee.Image = image4.ImageUrl;
             }
             CultureInfo culture = new CultureInfo("en-US");
             if (male.Checked)

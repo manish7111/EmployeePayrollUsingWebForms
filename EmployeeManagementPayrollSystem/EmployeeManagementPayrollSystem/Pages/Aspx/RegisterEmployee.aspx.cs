@@ -14,7 +14,12 @@ namespace EmployeeManagementPayrollSystem.Pages.Aspx
 {
     public partial class RegisterEmployee : System.Web.UI.Page
     {
-        readonly EmployeeRepo employeeRepo = new EmployeeRepo();
+        public readonly IEmployeeBL employeeRepo;
+        public RegisterEmployee(IEmployeeBL employeeRepo)
+        {
+            this.employeeRepo = employeeRepo;
+        }
+        //readonly EmployeeRepo employeeRepo = new EmployeeRepo();
         readonly DisplayEmployeeDetails displayEmployee = new DisplayEmployeeDetails();
         public static int HR = 1;
         public static int SALES = 2;
@@ -162,6 +167,10 @@ namespace EmployeeManagementPayrollSystem.Pages.Aspx
             name.Text = "";
             male.Checked = false;
             female.Checked = false;
+            profile1.Checked = false;
+            profile2.Checked = false;
+            profile3.Checked = false;
+            profile4.Checked = false;
             hr.Checked = false;
             sales.Checked = false;
             finance.Checked = false;

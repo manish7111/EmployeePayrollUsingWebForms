@@ -12,7 +12,12 @@ namespace EmployeeManagementPayrollSystem.Pages.Aspx
 {
     public partial class DisplayEmployee : System.Web.UI.Page
     {
-        EmployeeBL repo = new EmployeeBL();
+        //EmployeeBL repo = new EmployeeBL();
+        public readonly IEmployeeBL repo;
+        public DisplayEmployee(IEmployeeBL repo)
+        {
+            this.repo = repo;
+        }
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!Page.IsPostBack)

@@ -9,9 +9,14 @@ using System.Threading.Tasks;
 
 namespace EmployeeManagementBL
 {
-    public class EmployeeBL
+    public class EmployeeBL:IEmployeeBL
     {
-        private readonly EmployeeRepo repo = new EmployeeRepo();
+        //= new EmployeeRepo()
+        private readonly IEmployeeRepo repo ;
+        public EmployeeBL(IEmployeeRepo repo)
+        {
+            this.repo = repo;
+        }
         public DisplayEmployeeDetails AddEmployee(DisplayEmployeeDetails model)
         {
             return this.repo.AddEmployee(model);

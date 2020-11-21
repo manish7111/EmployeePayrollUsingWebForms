@@ -1,4 +1,5 @@
-﻿using EmployeeManagementDAL;
+﻿using EmployeeManagementBL;
+using EmployeeManagementDAL;
 using Microsoft.AspNet.WebFormsDependencyInjection.Unity;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,7 @@ namespace EmployeeManagementPayrollSystem
             IUnityContainer container = this.AddUnity();
 
             container.RegisterType<IEmployeeRepo, EmployeeRepo>();
+            container.RegisterType<IEmployeeBL, EmployeeBL>();
             // Code that runs on application startup
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
